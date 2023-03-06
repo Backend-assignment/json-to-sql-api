@@ -4,6 +4,109 @@
 
 This project is a simple API that converts JSON to SQL.
 
+1. create environment
+
+```bash
+python -m venv env
+```
+
+2. activate environment
+
+windows:
+```bash
+env\Scripts\activate
+```
+
+linux:
+```bash
+source env/bin/activate
+```
+
+3. install requirements
+
+```bash
+pip install -r requirements.txt
+```
+
+4. startproject
+
+```bash
+django-admin startproject core .
+```
+
+5. runserver
+
+```bash
+python manage.py runserver
+```
+
+5. migrate
+
+```bash
+python manage.py migrate
+```
+
+6. createsuperuser
+
+```bash
+python manage.py createsuperuser
+```
+
+7. startapp
+
+```bash
+
+python manage.py startapp api
+```
+
+8. add app to settings.py
+
+```python
+INSTALLED_APPS = [
+    'api.apps.ApiConfig',
+]
+```
+
+9. api models
+
+```python
+from django.db import models
+
+class Smartphones(models.Model):
+    price = models.CharField(max_length=255)
+    img_url = models.CharField(max_length=255)
+    color = models.CharField(max_length=255)
+    ram = models.CharField(max_length=255)
+    memory = models.CharField(max_length=255)
+    name = models.CharField(max_length=255)
+    model = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+```
+
+10. add api models to admin.py
+
+```python
+from django.contrib import admin
+from .models import Smartphones
+
+admin.site.register(Smartphones)
+```
+
+11. make migrations
+
+```bash
+python manage.py makemigrations
+```
+
+12. migrate
+
+```bash
+python manage.py migrate
+```
+
+
 ## json structure
 
 The JSON structure is as follows:
