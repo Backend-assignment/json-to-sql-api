@@ -59,3 +59,16 @@ The JSON structure is as follows:
 | GET   | /api/get/all | gets all products from sql database |
 | DELETE   | /api/delete/<id> | deletes product by id from sql database |
 | PUT   | /api/update/<id> | updates product by id from sql database |
+
+
+## startproject
+
+```bash
+python manage.py startproject core .
+```
+
+## startapp
+
+```bash
+python manage.py startapp api
+```
