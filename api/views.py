@@ -1,4 +1,5 @@
 from django.http import HttpRequest, JsonResponse
+from django.core.exceptions import ObjectDoesNotExist
 import json
 from .models import SmartPhone
 
@@ -76,5 +77,17 @@ def get_product(reqeust: HttpRequest, pk: int) -> JsonResponse:
             # get product from database by id
             product = SmartPhone.objects.get(id=pk)
             return JsonResponse(product.to_dict())
-        except:
+        except ObjectDoesNotExist:
+            return JsonResponse({"status": "object doesn't exist"})
+    
+
+def delete_product(reqeust: HttpRequest, pk: int) -> JsonResponse:
+    """delete product from database by id"""
+    if reqeust.method == "POST":
+        try:
+            # get product from database by id
+            product = SmartPhone.objects.get(id=pk)
+            product.delete()
+            return JsonResponse(product.to_dict())
+        except ObjectDoesNotExist:
             return JsonResponse({"status": "object doesn't exist"})
