@@ -12,3 +12,14 @@ class SmartPhone(models.Model):
     def __str__(self):
         return self.name
     
+    def to_dict(self):
+        returned = {
+                'price': self.price,
+                'img_url':self.img_url,
+                'color':self.color,
+                'ram':self.ram,
+                'memory':self.memory,
+                'name':self.name,
+                'model':self.model
+            }
+        return returned
