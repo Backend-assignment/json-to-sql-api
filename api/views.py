@@ -23,6 +23,22 @@ def add_product(reqeust: HttpRequest) -> JsonResponse:
         name = data.get('name', False)
         model = data.get('model', False)
 
+        # check all properties is valid
+        if price == False:
+            return JsonResponse({"status": "price field is required."})
+        if img_url == False:
+            return JsonResponse({"status": "img_url field is required."})
+        if color == False:
+            return JsonResponse({"status": "color field is required."})
+        if ram == False:
+            return JsonResponse({"status": "ram field is required."})
+        if memory == False:
+            return JsonResponse({"status": "memory field is required."})
+        if name == False:
+            return JsonResponse({"status": "name field is required."})
+        if model == False:
+            return JsonResponse({"status": "model field is required."})
+
         # create a inctance of SmartPhone 
         smartphone = SmartPhone(
             price=price,
