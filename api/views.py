@@ -3,8 +3,6 @@ import json
 from .models import SmartPhone
 
 
-
-
 def add_product(reqeust: HttpRequest) -> JsonResponse:
     """add new product to database"""
     if reqeust.method == 'POST':
@@ -55,3 +53,17 @@ def add_product(reqeust: HttpRequest) -> JsonResponse:
         # return data
         returned = smartphone.to_dict()
         return JsonResponse(returned)
+    
+
+def get_all_product(reqeust: HttpRequest) -> JsonResponse:
+    """get products to database"""
+    if reqeust.method == "GET":
+        # get all priduct from database
+        products = SmartPhone.objects.all()
+        # results data
+        result = []
+        for product in products:
+            # add smartphone data as dict
+            result.append(product.to_dict())
+        
+        return JsonResponse(result, safe=False)
