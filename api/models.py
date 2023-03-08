@@ -1,7 +1,7 @@
 from django.db import models
 
 class SmartPhone(models.Model):
-    price = models.CharField(max_length=30)
+    price = models.FloatField()
     img_url = models.CharField(max_length=255)
     color = models.CharField(max_length=30)
     ram = models.IntegerField()
