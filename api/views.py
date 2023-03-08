@@ -91,3 +91,54 @@ def delete_product(reqeust: HttpRequest, pk: int) -> JsonResponse:
             return JsonResponse(product.to_dict())
         except ObjectDoesNotExist:
             return JsonResponse({"status": "object doesn't exist"})
+        
+    
+
+def update_product(reqeust: HttpRequest, pk: int) -> JsonResponse:
+    """delete product from database by id"""
+    if reqeust.method == "POST":
+        try:
+            # get body from request
+            body = reqeust.body
+            # get body data
+            decoded = body.decode()
+            # data to dict
+            data = json.loads(decoded)
+            # get all properties
+            price = data.get('price', False)
+            img_url = data.get('img_url', False)
+            color = data.get('color', False)
+            ram = data.get('ram', False)
+            memory = data.get('memory', False)
+            name = data.get('name', False)
+            model = data.get('model', False)
+
+            # get product from database by id
+            product = SmartPhone.objects.get(id=pk)
+
+            # check all properties is valid
+            if price is not False:
+                product.price = price
+            if img_url:
+                product.img_url = img_url
+            if color:
+                product.color = color
+            if ram:
+                product.ram = ram
+            if memory:
+                product.memory = memory
+            if name:
+                product.name = name
+            if model:
+                product.model = model
+
+            # save product
+            product.save()
+
+            return JsonResponse(product.to_dict())
+            
+        except ObjectDoesNotExist:
+            return JsonResponse({"status": "object doesn't exist"})
+
+
+
