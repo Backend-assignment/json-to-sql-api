@@ -67,3 +67,14 @@ def get_all_product(reqeust: HttpRequest) -> JsonResponse:
             result.append(product.to_dict())
         
         return JsonResponse(result, safe=False)
+    
+
+def get_product(reqeust: HttpRequest, pk: int) -> JsonResponse:
+    """get product from database by id"""
+    if reqeust.method == "GET":
+        try:
+            # get product from database by id
+            product = SmartPhone.objects.get(id=pk)
+            return JsonResponse(product.to_dict())
+        except:
+            return JsonResponse({"status": "object doesn't exist"})
